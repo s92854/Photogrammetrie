@@ -42,7 +42,7 @@ $$ n = {C<sub>Luft</sub> \over C<sub>Medium</sub>} $$
 > C: Lichtgeschwindigkeit
 > n: Brechzahl
 
-$$ n<sub>1</sub> * sin(\alpha) = n<sub>2</sub> * sin(\beta) $$
+$$n<sub>1</sub> * sin(\alpha) = n<sub>2</sub> * sin(\beta)$$
 
 ## Reflektion
 * Bei ungünstigen Verhältnissen der Brechungszahlen resultiert eine Reflektion
@@ -113,13 +113,13 @@ M<sub>b</sub>: Bildmaßstab: 1:m<sub>b</sub>
 
 ## Formatwinkel
 Der Formatwinkel gibt an, welchen Winkel man im Raum mit einer Optik abdeckt (FOV - Field of View)
-$$tan(\Omega)={s' \over 2c}$$
+$tan(\Omega)={s' \over 2c}$
 
 ## Öffnungswinkel
-$$tan(\alpha)={d' \over 2f}$$
+$tan(\alpha)={d' \over 2f}$
 
 Lichtstärke:
-$$Lichtstärke = Relative Öffnung = {d \over f}$$
+$Lichtstärke = Relative Öffnung = {d \over f}$
 
 ![blenden](https://github.com/s92854/Photogrammetrie/assets/134683810/f8ab5f1f-7fcf-463d-9b62-e08a0bf547a6)
 ![schärfen](https://github.com/s92854/Photogrammetrie/assets/134683810/be042c7b-a71b-4dbd-bbf5-4554db170ad1)
@@ -147,7 +147,7 @@ $$t = a<sub>h</sub> - a<sub>v</sub> = {2 * u' * k * (1 + m<sub>b</sub>) \over m<
 #### Lichtabfall
 * Beleuchtungsstärke E oder Intensität I fällt mit zunehmendem Winkel von der Bildmitte ($\tau$) zum Bildrand hin ab
 
-$$I' = I * cos^4(\tau) = E(\tau) = E * cos^4(\tau)$$
+$I' = I * cos^4(\tau) = E(\tau) = E * cos^4(\tau)$
 
 #### Vignettierung
 * verursacht durch optische (Linse oder Blende) oder mechanische Verdeckungen (Objektivränder)
@@ -168,4 +168,41 @@ Querfehler erzeugen Farbsäume (s.o.)
 
 ![beugungsunschärfe](https://github.com/s92854/Photogrammetrie/assets/134683810/647bcc73-1dba-42db-a78e-324367d04974)
 
+
 ## Geometrische Abbildungsverzeichnung
+Treten durh Abweichungen vom mathematischen Modell der Zentralperspektive auf
+* Verkippung der Bildebene gegenüber der optischen Achse
+* Verformung der Bildebene
+* Ablenkung der Strahlen aufgrund von asymmetrischer Linsenanordnung/Blendenplazierung
+
+### Liniensystem
+* Verschiebung der Projektionszentren
+   * Eintrittswinkel nicht mehr gleich Austrittswinkel > optische Verzeichnung
+   * Hauptstrahl nicht mehr senkrecht auf Bildebene > Definierung eines mathematischen Projektionszentrums (neben physikalischem)
+
+O<sub>M</sub>' steht senkrecht im Abstand c über Bildebene: $\tau = \tau'$
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/7dc501d0-a5df-4737-96b0-9e0b413e0957)
+
+### Reale Optische Abbildung
+
+![reale optische abbildung](https://github.com/s92854/Photogrammetrie/assets/134683810/3df12f3d-3d5b-415f-a1cb-e6baa7f05fa9)
+
+$r' = tan(\tau) * c + \Delta r'$
+
+## Radialsymmetrische Verzeichnung
+* größter Einfluss auf die Abbildungsfehler
+* entsteht durch Brechungsänderungen an den Linsen des Objektivs
+
+![radialsym_verz](https://github.com/s92854/Photogrammetrie/assets/134683810/0842491b-4d8b-484a-97c6-b84cb11849fd)
+![radial](https://github.com/s92854/Photogrammetrie/assets/134683810/a37baffe-4e0f-4287-8241-182d93ce2ea7)
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/eac8cc87-9d78-4bb7-8279-8ec98444ca47)
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/11b240ff-9f45-4aff-a5a6-31cab7b5e06b)
+
+### Modellierung der Verzeichnung
+Conray-Koeffizenten: $\Delta r'rad = K0 * r' + K1 * r'^3 + K2 * r'^5 + K3 * r'^7$
+
+Seidel-Reihe: $\Delta r'rad = A1 * r'3 + A2 * r'^5 + A3 * r'7 + ...$
+
+Korrektur der Bildkoordinaten x und y: $\Delta x' = x' * {\Delta r'rad \over r'}$
+$\Delta y' = y' * {\Delta r'rad \over r'}$
