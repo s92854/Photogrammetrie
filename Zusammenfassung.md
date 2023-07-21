@@ -67,17 +67,23 @@ $$ n<sub>1</sub> * sin(\alpha) = n<sub>2</sub> * sin(\beta) $$
     * definiert als kleinster noch wahrnehmbarer Winkel $\epsilon$
     * ca. 5'' - 10''. Monokulare Sehschärfe ca. 30''
     * deutliche Sehweite von 25: stereoskopische Sehschärfe 6-12μm; monokulare Sehschärfe: 40μm
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/2c648cf3-3c2d-41b6-b1fe-c89eae8f52b6)
+
+
 ### Künstlich
 Verhältnisse der Zentralprojektion der Aufnahme werden künstlich wiederhergestellt.
 
 ![image](https://github.com/s92854/Photogrammetrie/assets/134683810/d808e89d-5a55-417b-bccf-1c2bafa343bf)
+
+Als homologe Punkte bezeichnet man jene Punkte, in denen sich beide homologe Strahlen schneiden.
 
 Bedingungen:
 * dieselbe Szene, verschiedene Aufnahmeorten in gleichem Maßßstab
 * Aufnahmekonfiguration entspricht ungefähr photogrammetrischem Normalfall
 * Jedem Auge wird ein Bild gezeigt > so, dass sich die von den Augen ausgehenden homologen Strahlen in den Objektpunkten vor dem Beobachter im Raum schneiden
 
-## Optik
+# Optik
 * Abbildung des realen Objekts auf einem Sensor geschieht über optisches System (Linsen- oder Spiegelsystem)
 * davor sitzt eine Blende: reguliert einfallendes Licht und Schärfentiefe des Bildes (scharfer Bereich vor und hinter dem Objekt)
 Die auf den Sensor einfallende Lichtmenge ist proportional der Blendenöffnung und der Belichtungszeit
@@ -104,3 +110,62 @@ vereinfachte Darstellung:
 m<sub>b</sub>: Bildmaßstabszahl   (dient der Bestimmung notwendiger Aufnahmeparameter)
 
 M<sub>b</sub>: Bildmaßstab: 1:m<sub>b</sub>
+
+## Formatwinkel
+Der Formatwinkel gibt an, welchen Winkel man im Raum mit einer Optik abdeckt (FOV - Field of View)
+$$tan(\Omega)={s' \over 2c}$$
+
+## Öffnungswinkel
+$$tan(\alpha)={d' \over 2f}$$
+
+Lichtstärke:
+$$Lichtstärke = Relative Öffnung = {d \over f}$$
+
+![blenden](https://github.com/s92854/Photogrammetrie/assets/134683810/f8ab5f1f-7fcf-463d-9b62-e08a0bf547a6)
+![schärfen](https://github.com/s92854/Photogrammetrie/assets/134683810/be042c7b-a71b-4dbd-bbf5-4554db170ad1)
+![schärfentiefe](https://github.com/s92854/Photogrammetrie/assets/134683810/d3d59faf-8b20-4461-9a32-71432c2faf9c)
+
+So lange die Unschärfekreise eines abgebildeten Objekts nicht größer wird als die Auflösungsgrenze, werden die Objekte als scharf wahrgenommen (weil das Auge die Auflösungsgrenze nicht erreicht hat).
+
+$$u' = {a<sub>h</sub> - a<sub>v</sub> \over a<sub>h</sub> + a<sub>v</sub>} * {f^2 \over k * (a - f)}$$
+
+$$t = a<sub>h</sub> - a<sub>v</sub> = {2 * u' * k * (1 + m<sub>b</sub>) \over m<sub>b</sub>^2 - ({u'k \over f})^2)}$$
+
+> k = Blendenzahl; m<sub>b</sub> = Blendenmaßstabszahl; u' = Zerstreuungskreis = ${1 \over 1500}s'$
+
+## Radiometrische Abbildungsverzeichnung
+### Einfluss der Blende
+* Lichtmenge, die auf die Bildebene trifft
+* Position der Projektionszentren
+* Schärfentiefe
+* kann chromatische Längsfehler verringern
+### Radiometrisch   (Messen von eletkromagnetischer Strahlung)
+* Lichtabfall (Vignettierung)
+* Über- / Unterbelichtung
+* Chromatischer Längs-/Querfehler
+
+#### Lichtabfall
+* Beleuchtungsstärke E oder Intensität I fällt mit zunehmendem Winkel von der Bildmitte ($\tau$) zum Bildrand hin ab
+
+$$I' = I * cos^4(\tau) = E(\tau) = E * cos^4(\tau)$$
+
+#### Vignettierung
+* verursacht durch optische (Linse oder Blende) oder mechanische Verdeckungen (Objektivränder)
+* schwächere Beleuchtung in Richtung des Bildrandes
+
+### Chromatische Abberation
+Lichtbrechung erfolgt durch unterschiedliche Wellenlängen unterschiedlich stark > Verschiebung der Farben
+-> Hohe Blende stellt Strahlen stärker parallel > Verringerung des Effekts
+
+![chrom_abberation](https://github.com/s92854/Photogrammetrie/assets/134683810/af36fa64-e2bf-430b-a5bc-98c047aac5eb)
+![korrektur chrom_abberation](https://github.com/s92854/Photogrammetrie/assets/134683810/6840c2f7-2a6f-4f4a-8f07-57d2e01c75f5)
+
+Unterscheidung in Längs- und Querfehler
+Längsfehler erzeugen Unschärfen
+Querfehler erzeugen Farbsäume (s.o.)
+
+### Beugungsunschärfe
+
+![beugungsunschärfe](https://github.com/s92854/Photogrammetrie/assets/134683810/647bcc73-1dba-42db-a78e-324367d04974)
+
+## Geometrische Abbildungsverzeichnung
