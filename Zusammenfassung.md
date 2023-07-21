@@ -120,6 +120,7 @@ $tan(\alpha)={d' \over 2f}$
 
 Lichtstärke:
 $Lichtstärke = Relative Öffnung = {d \over f}$
+$Blendenkennzahl k = {f \over d}
 
 ![blenden](https://github.com/s92854/Photogrammetrie/assets/134683810/f8ab5f1f-7fcf-463d-9b62-e08a0bf547a6)
 ![schärfen](https://github.com/s92854/Photogrammetrie/assets/134683810/be042c7b-a71b-4dbd-bbf5-4554db170ad1)
@@ -131,7 +132,7 @@ $$u' = {a<sub>h</sub> - a<sub>v</sub> \over a<sub>h</sub> + a<sub>v</sub>} * {f^
 
 $$t = a<sub>h</sub> - a<sub>v</sub> = {2 * u' * k * (1 + m<sub>b</sub>) \over m<sub>b</sub>^2 - ({u'k \over f})^2)}$$
 
-> k = Blendenzahl; m<sub>b</sub> = Blendenmaßstabszahl; u' = Zerstreuungskreis = ${1 \over 1500}s'$
+> k = Blendenkennzahl; m<sub>b</sub> = Blendenmaßstabszahl; u' = Zerstreuungskreis = ${1 \over 1500}s'$
 
 ## Radiometrische Abbildungsverzeichnung
 ### Einfluss der Blende
@@ -206,3 +207,83 @@ Seidel-Reihe: $\Delta r'rad = A1 * r'3 + A2 * r'^5 + A3 * r'7 + ...$
 
 Korrektur der Bildkoordinaten x und y: $\Delta x' = x' * {\Delta r'rad \over r'}$
 $\Delta y' = y' * {\Delta r'rad \over r'}$
+
+## Asymmetrie und Tangentiale Verzeichnung
+dezentrale Linsen können asymmetrische und tangentiale Verzeichnungen hervorrufen
+$\Delta x'tan = B1 * (r'^2 + 2rx'^2) + 2B2 * x' * y'$
+
+$\Delta y'tan = B2 * (r'^2 + 2y'^2) + 2B1 * x' * y'$
+> r = radialer Abstand vom Bildhauptpunkt
+
+## Affine Verzeichnung und Scherung der Koordinatenachsen
+Bildkoordinatensystem nicht orthogonal und dessen Koordinatenachsen sind ungleichmäßig skaliert
+
+$\Delta x'aff = C1 * x' + C2 * y'$
+
+$\Delta y'aff = 0$
+
+In der Praxis angewendet:
+
+$\Delta x'aff = C1x'$
+
+$\Delta x'shear = C2y'$
+
+$\Delta y'aff = -C1y'$
+
+$\Delta y'shear = C2x'$
+
+## Punktverwaschung (Punktspreizfunktion / point spread function)
+* wie werden punktförmige Objekte in Bildebene dargestellt
+* Einflüsse durch:
+   * Apertur (Öffnungswinkel der Optik)
+   * Temperatur
+
+## Entwicklung/Erstellung eines Bildes
+### Photochemische Bildaufzeichnung
+* Emulsion auf einem Schichtträger
+* chemische Entwicklung, Fixierung des Bildträgers
+* Entwicklung des Positives
+### Photoelektrische Bildaufzeichnung
+* Sensoren registrieren die einfallende Lichtenergie
+* versch. techn. Realisierungen
+
+## Objekt und Bild
+### Objekt
+* Kontinuierliche Geometrie und Radiometrie (Helligkeitsverlauf)
+### Analoge Fotografie
+* kann diese Eigenschaft größten Teils wiedergeben
+### Digitale Fotografie
+* Objekte werden auf einer diskreten Anzahl von Elemente abgebildet > **Abtastung / Diskretisierung**
+* Radiometrische Informationen werden ebenfalls in definierte Grauwertstufen abgebildet > **Quantisierung**
+
+## CCD-Sensoren
+CCD = Charge Coupled Device
+Pixel sind Sensoren, die die einfallenden Photonen registrieren
+* "Eimerprinzip" > registrierte Ladungen auslesen und weiter verarbeiten > limitiertes Fassungsvermögen
+* Kenngröße Fassungsvermögen: Full-Well > wird zusammen mit Gain und Bildtiefe bestimmt
+* Anzahl an Photonen, die eine Grauwertstufe definieren: **Gain**
+
+## Bildtiefe / Bittiefe
+* Anzahl der Grauwerte > $2^n$ mögliche Grauwerte
+
+### CCD-Anpassungen
+* Lücken zwischen aktiven Sensorelementen > dort aufkommende Photonen werden nicht registriert > Plazieren von Mikrolinsen, um "Pixel fill factor" zu erhöhen
+
+## CMOS
+Complementary metal oxide semi-conductor
+Vorteile gegenüber CCD:
+* geringerer Energieverbrauch
+* geringe Herstellungskosten
+* direkte Adressierbarkeit von Sensorelementen
+* schnelles Auslesen (durch direkte Verarbeitung der Information am Pixel - Auslesesequenzen entfallen)
+* hoher Dynamikumfang
+
+## Digitale Farbbilder
+Farb-Pixel wird in mehrere Sektoren unterteilt
+* Farbkalibrierung ist schwierig
+* Auflösung ist reduziert
+* Photogrammetrisch muss man beachten mit welcher Wellenlänge man arbeitet
+
+## (Pixel-) Auflösung
+* Pixelauflösung = Fläche, die ein Pixel im Objektraum abdeckt
+* Auflösungsvermögen wird über physikalische Pixelgröße, Kamerakonstante, Abstand zum Objekt berechnet
