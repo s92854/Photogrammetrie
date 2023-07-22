@@ -366,3 +366,58 @@ Reihenfolge der Rotationen muss bekannt sein, denn Rotationen sind nicht eindeut
 ![image](https://github.com/s92854/Photogrammetrie/assets/134683810/663102ba-df1d-4da2-83c5-518747bef4da)
 ![image](https://github.com/s92854/Photogrammetrie/assets/134683810/75ab4571-8545-45df-a6b9-b3b8427e5a99)
 
+## Innere Orientierung
+* Alle Kameraparameter die das mathematische Modell der Kamera möglichst genau bestimmen
+   * Korrektur von Kamera- und Sensorungenauigkeiten
+   * Korrektur der Messwerte
+
+$$\vec{P'} = {\begin{bmatrix} x'P \\  \\ y'P \\ -c \end{bmatrix}} = {\begin{bmatrix} xP \\  \\ yP \\  \\ 0 \end{bmatrix}} + Korrekturen$$
+
+### Bildhauptpunkt H'
+* Lotfußpunkt des Projektionszentrums im Bildkoordinatensystem (x'0, y'0)
+### Kamerakonstante c
+* Lotrechter Abstand des Projektionszentrums von der Bildebene (in negativer Z-Richtung des Bildkoordinatensystems)
+### Parameter zur Beschreibung von Abbildungsfehlern
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/9e650f07-1397-449f-bf11-5e8d769ab177)
+
+
+## Äußere Orientierung
+* Beschreibt die Position & Lage der Kamera in Bezug auf das Zielkoordinatensystem
+* 6 + 1 Parameter (Zeit)
+
+### Stabilität der Kamerageometrie
+Innere Geometrie wird beeinflusst durch:
+* Fokussierung
+* Objektivwechsel/Brennweitenänderung (Zoom)
+* Umgebungstemperatur
+* Luftfeuchte
+* Technische Hilfsmittel zur Bildstabilisierung
+* Mechanische Beeinflussung
+
+### Kalibrierungsverfahren
+* Laborkalibrierung
+   * hohe Genauigkeit durch Hersteller; langzeitig
+   * Goniometer = Winkelmesser, Minipulator = nodal bench (Rotation), Kollimator = stellt scheinbar unendlich entferntes in endlichem Abstand dar
+* Testfeldkalibrierung
+   * Analytische Kalibration durch Auswertung von festen Punktfeldern
+   * zeitlich begrenzt kalibriert
+   * Bestimmung der inneren Orienterung durch Bündelblockausgleich
+* Simultankalibrierung
+   * Modellierung der Parameter für jede Aufnahme
+   * instabil und variierende Parameter
+
+### Plumblines
+Gerade Linien > Anhand der Wölbungen der Linien in der Aufnahme sind Ausgleichungen möglich
+
+### Prinzip der Kalibrierung
+Bekannt:
+* raumliche Verteilung der Punkte
+* Entferungne zwischen den Punkten
+* Punkte gleichmäßig & bildformatfüllend angeordnet
+
+### Simultankalibrierung
+* Kamerastandpunkte und Parameter der inneren Orientierung werden simultan über eine Ausgleichung bestimmt
+
+### Selbstkalibrierung
+* Simultankalibrierung ohne explizites Testfeld, nur mit photogrammetrischer Techniken
