@@ -485,12 +485,106 @@ Bekannt:
 * verfügbaren Aufnahmesystemen
 * verfügbaren Auswertsystemen
 
-## Photogrammetrischer Normalfall
-* parallele Aufnhame senkrecht zur Basis
-
-![photo_norm](https://github.com/s92854/Photogrammetrie/assets/134683810/5857cc22-e9d2-4ace-bb46-d5040655b732)
-
 ## Stereobildkonfiguration
 
 ![stereokonfig](https://github.com/s92854/Photogrammetrie/assets/134683810/d904217e-422b-40f5-9cb3-8449ee2bf5ce)
 
+## Kollinearitätsgleichungen
+
+$$\xi = \xi<sub>0</sub> - c * {r11(X - X0) + r21(Y - Y0) + r31(Z - Z0) \over r13(X - X0) + r23(Y - Y0) + r33(Z - Z0)}$$
+
+$$\eta = \eta<sub>0</sub> - c * {r12(X - X0) + r22(Y - Y0) + r32(Z - Z0) \over r13(X - X0) + r23(Y - Y0) + r33(Z - Z0)}$$
+
+![main_picture](https://github.com/s92854/Photogrammetrie/assets/134683810/efd7e353-a8de-4f7f-bc2b-3a0c01d8f4a3)
+
+> Unbekannt: Koordinaten P, Vektor zu P, Informationen
+
+### Bildrauminformationen
+> Kamerakonstante, Bildhauptpunktkoordinate (blau)
+
+<!--
+$c,H(\xi 0,\eta 0)$
+-->
+
+> Beobachtung der Bildkoordinate (lila)
+
+<!--
+$P'(\xi,\eta)$
+-->
+
+> Parameter der Abbildungsverzeichnung > 3D-Vektor im Kamera-KS (gelb)
+
+<!--
+$\vec{P'} = {\begin{bmatrix} \xi 0 - \xi - \Delta \xi \\ \mid \\ \eta 0 - \eta - \Delta \eta \\ \mid \\ -c \end{bmatrix}}$
+-->
+
+> Ort der Kamera als Vektor (brün)
+
+<!--
+$\vec{O} = {\begin{bmatrix} X0 \\ \mid \\ Y0 \\ \mid \\ Z0 \end{bmatrix}}$
+-->
+
+> Rotation des Kamera-KS in das Objekt-KS (rot)
+
+<!--
+$\vec{R} = {\begin{bmatrix} ... \\ \mid \\ R(\omega,\phi,\kappa \\ \mid \\ ... \end{bmatrix}}$
+-->
+
+![formeln](https://github.com/s92854/Photogrammetrie/assets/134683810/8f58e227-b4ea-4317-bc9f-e3898855b67f)
+![ksys](https://github.com/s92854/Photogrammetrie/assets/134683810/edf5ea18-79a9-4c5d-90b0-8d618cae2304)
+
+### Punktbestimmung
+![punktbestimmung](https://github.com/s92854/Photogrammetrie/assets/134683810/84bdeeaa-5901-45ad-8999-bd287b042690)
+
+### Umstellen der Kollinearitätsgleichung
+
+![kgl](https://github.com/s92854/Photogrammetrie/assets/134683810/8e541d63-9b62-48d3-a7ed-30517e53d4f7)
+
+## 3D-Rekonstruktion
+* mind. 2 Bilder > 2*x, 2*y > 3 Unbekannte bestimmbar
+* Basis muss zwischen Aufnahmestandorten existieren, sowie genügend großer Konvergenzwinkel
+
+## Photogrammetrischer Normalfall
+* parallele Aufnahme senkrecht zur Basis
+
+![photo_norm](https://github.com/s92854/Photogrammetrie/assets/134683810/5857cc22-e9d2-4ace-bb46-d5040655b732)
+![stereo_norm](https://github.com/s92854/Photogrammetrie/assets/134683810/763036f3-aa73-464c-8ff7-6c9fdf53210f)
+
+Es gilt:
+
+X<sub>01</sub> = Y<sub>01</sub> = Z<sub>01</sub> = Y<sub>02</sub> = Z<sub>02</sub> = 0
+
+X<sub>02</sub> = B; $\omega$<sub>1</sub> = $\omega$<sub>2</sub> = $\kappa$<sub>1</sub> = $\kappa$<sub>2</sub> = $\phi$<sub>1</sub> = $\phi$<sub>2</sub> = 0
+
+Daher Vereinfachung der Kollinearitätsgleichungen:
+
+$\xi = \xi$<sub>0</sub>$ - c * {r11(X - X0) \over r33(Z)}$
+
+$\eta = \eta$<sub>0</sub>$ - c * {r22(Y) \over r33(Z)}$
+
+Kamera 1:
+$\xi<sub>1</sub> = \xi<sub>0</sub> - c * {X \over Z}$
+
+$\eta<sub>1</sub> = \eta<sub>0</sub> - c * {Y \over Z}$
+
+$X = Z * {\xi<sub>1</sub> - \xi<sub>0</sub> \over -c}$
+
+$Y = Z * {\eta<sub>1</sub> - \eta<sub>0</sub> \over -c}$
+
+
+Kamera 2:
+$\xi<sub>2</sub> = \xi<sub>0</sub> - c * {X - B \over Z}$
+
+$\eta<sub>2</sub> = \eta<sub>0</sub> - c * {Y \over Z}$
+
+$X = B + Z * {\xi<sub>2</sub> - \xi<sub>0</sub> \over -c}$
+
+$Y = Z * {\eta<sub>2</sub> - \eta<sub>0</sub> \over -c}$
+
+## Höhenbestimmung aus einer Parallaxe
+Gleichsetzen beider X Gleichungen, Umstellen nach Z
+
+$Z = {-cB \over \xi 1 - \xi 2}$
+
+
+## Orientierung nach Kernstrahlen
