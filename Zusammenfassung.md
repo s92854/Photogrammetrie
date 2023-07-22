@@ -322,7 +322,9 @@ $$\vec{P'} = {\begin{bmatrix} x'P \\ y'P \\ z'P \end{bmatrix}} + Korrekturen$$
 
 > Korrekturen: Kameraverzeichnung (Optik), Bildebenenverformung (Bildträger)
 
-$$Translation \vec{O} = {\begin{bmatrix} X0 \\ Y0 \\ Z0 \end{bmatrix}}$$
+Translation:
+
+$$\vec{O} = {\begin{bmatrix} X0 \\ Y0 \\ Z0 \end{bmatrix}}$$
 
 Beschreibung der Kameraausrichtung im Objektraum kann über Winkel beschrieben werden: Rotation um drei Winkel
 
@@ -383,7 +385,7 @@ Reihenfolge der Rotationen muss bekannt sein, denn Rotationen sind nicht eindeut
 $$\vec{P'} = {\begin{bmatrix} x'P \\  \\ y'P \\ -c \end{bmatrix}} = {\begin{bmatrix} xP \\  \\ yP \\  \\ 0 \end{bmatrix}} + Korrekturen$$
 
 ### Bildhauptpunkt H'
-* Lotfußpunkt des Projektionszentrums im Bildkoordinatensystem (x'0, y'0)
+* Lotfußpunkt des Projektionszentrums im Bildkoordinatensystem (x'<sub>0</sub>, y'<sub>0</sub>)
 ### Kamerakonstante c
 * Lotrechter Abstand des Projektionszentrums von der Bildebene (in negativer Z-Richtung des Bildkoordinatensystems)
 ### Parameter zur Beschreibung von Abbildungsfehlern
@@ -456,7 +458,7 @@ Bekannt:
 ### Messkamera
 * Kamerakonstante durch fest eingebautes, nicht fokussierbares Objektiv konstant
 * Bildebene senkrecht zu optischer Achse
-* Verzeichnungsfreies Objektiv ($\Delta r' < 4 µm) > Bildhauptpunkt = Bildmittelpunkt
+* Verzeichnungsfreies Objektiv ($\Delta r' < 4 µm$) > Bildhauptpunkt = Bildmittelpunkt
 * ebene Bildfläche durch Glasplatten oder mechanische Bildverebnung (Andrucksystem)
 * optionale Zusatzeinrichtungen zur geodätischen Messung von Passpunkten
 
@@ -558,33 +560,135 @@ X<sub>02</sub> = B; $\omega$<sub>1</sub> = $\omega$<sub>2</sub> = $\kappa$<sub>1
 
 Daher Vereinfachung der Kollinearitätsgleichungen:
 
-$\xi = \xi$<sub>0</sub>$ - c * {r11(X - X0) \over r33(Z)}$
+$$\xi = \xi<sub>0</sub> - c * {r11(X - X0) \over r33(Z)}$$
 
-$\eta = \eta$<sub>0</sub>$ - c * {r22(Y) \over r33(Z)}$
+$$\eta = \eta<sub>0</sub> - c * {r22(Y) \over r33(Z)}$$
 
 Kamera 1:
-$\xi<sub>1</sub> = \xi<sub>0</sub> - c * {X \over Z}$
 
-$\eta<sub>1</sub> = \eta<sub>0</sub> - c * {Y \over Z}$
+$$\xi<sub>1</sub> = \xi<sub>0</sub> - c * {X \over Z}$$
 
-$X = Z * {\xi<sub>1</sub> - \xi<sub>0</sub> \over -c}$
+$$\eta<sub>1</sub> = \eta<sub>0</sub> - c * {Y \over Z}$$
 
-$Y = Z * {\eta<sub>1</sub> - \eta<sub>0</sub> \over -c}$
+$$X = Z * {\xi<sub>1</sub> - \xi<sub>0</sub> \over -c}$$
+
+$$Y = Z * {\eta<sub>1</sub> - \eta<sub>0</sub> \over -c}$$
 
 
 Kamera 2:
-$\xi<sub>2</sub> = \xi<sub>0</sub> - c * {X - B \over Z}$
 
-$\eta<sub>2</sub> = \eta<sub>0</sub> - c * {Y \over Z}$
+$$\xi<sub>2</sub> = \xi<sub>0</sub> - c * {X - B \over Z}$$
 
-$X = B + Z * {\xi<sub>2</sub> - \xi<sub>0</sub> \over -c}$
+$$\eta<sub>2</sub> = \eta<sub>0</sub> - c * {Y \over Z}$$
 
-$Y = Z * {\eta<sub>2</sub> - \eta<sub>0</sub> \over -c}$
+$$X = B + Z * {\xi<sub>2</sub> - \xi<sub>0</sub> \over -c}$$
+
+$$Y = Z * {\eta<sub>2</sub> - \eta<sub>0</sub> \over -c}$$
 
 ## Höhenbestimmung aus einer Parallaxe
 Gleichsetzen beider X Gleichungen, Umstellen nach Z
 
-$Z = {-cB \over \xi 1 - \xi 2}$
+$$Z = {-cB \over \xi 1 - \xi 2}$$
 
 
 ## Orientierung nach Kernstrahlen
+* homologe Strahlen müssen sich im Objektraum schneiden
+* Bildpaar muss relativ orientiert sein
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/bcf8c9b8-573d-4000-988a-d4bce6d61391)
+
+![kernstrahlorientierung](https://github.com/s92854/Photogrammetrie/assets/134683810/3815d1e7-874b-4942-b1bb-b930e93cee2e)
+
+* Kernstrahlen: H<sub>1</sub>' und H<sub>2</sub>', bzw. H<sub>1</sub>'' und H<sub>2</sub>''
+* Orientierung:
+   * Auffinden der Bildhauptpunkte
+   * Übertragen in die Nachbarbilder
+   * Ausrichten der Kernstrahlen auf einer Geraden
+
+## Photogrammetrische Produkte
+### 2D
+* Bildmosaike
+   * gleiche KS und Orientierungen
+* Bilder in Epipolargeometrie
+   * Eingrenzung des Suchbereichs homologer Punkte
+* Karten
+   * konstanter Maßstab in der Ebene
+   * Orthophoto und TrueOrthophoto
+   * Transformation von einer Zentralprojektion in eine Parallelprojektion
+
+#### Orthophoto
+* auf topographisches Geländemodell entzerrt
+* Objekte (Häuser, Bäume, Autos) werden nicht erfasst > verzerrter Maßstab in diesen Bereichen
+
+#### TrueOrthophoto
+* Entzerrung auf digitalem Oberflächenmodell > konstanter Maßstab
+
+### 3D
+* Geländemodelle
+   * Digitale Geländemodelle (DGM)
+   * Digitale Terrain Modelle (DTM)
+* Oberflächenmodelle
+   * Digitale Oberflächenmodelle (DOM)
+* Objektmodelle
+   * 3D City Models
+* Figurenmodelle
+
+## Entzerrung
+1. Bildaufnahme mit Kamera: **Zentralprojektion** > untersch. Maßstab
+2. Karte/ entzerrtes Bild (Orthobild): **Parallelprojektion** > konstanter Maßstab
+
+* Gerätetechnische Einteilung (Entwicklung)
+   * Graphische Entzerrung
+   * Optische (optisch-photographische) Entzerrung
+   * Analytische Entzerrung
+   * Digitale Entzerrung
+* Mathematisch-methodische Einteilung (Berechnung)
+
+> exakt oder Näherung? Wiederherstellung der Orientierung? Dimension: ebene oder räumliche Entzerrung? Direkte oder indirekte Entzerrung?
+
+### Ebene Entzerrung
+* 2D-Transformation
+* keine Wiederherstellung der Orientierung
+   * Ähnlichkeitstransformation (4 Parameter)
+   * Affine Transformation (Polynom 1. Grades, 6 Parameter)
+   * Polynomtransformation vom Grad n ((n+1)(n+2) Parameter)
+   * Projektive Transformation (8 Parameter pro Bilinearfacette)
+   * Bilineare Transformation (8 Parameter)
+
+![lagefehler](https://github.com/s92854/Photogrammetrie/assets/134683810/0f434d70-0b6c-44c2-9440-52aefba8df69)
+
+Vergleich ebener Entzerrungen:
+
+![ebene-entzerrungen](https://github.com/s92854/Photogrammetrie/assets/134683810/5f46213d-0e6e-486c-ba74-3cfeb47f941e)
+
+### Räumliche Entzerrung
+* Wiederherstellung der Orientierung
+* Projektion auf Bezugsfläche
+* Differentielle Entzerrung (exaktes Verfahren)
+
+Kollinearitätsgleichungen stellen Beziehung zwischen Bild und Objektraum her > Innere und Äußere Orientierung benötigt
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/25cc9774-ec21-49ca-bfa3-cf394149f80c)
+
+Je nach geometrischer Bezugsfläche ist räumliche Entzerrung genauer als ebene Entzerrung
+
+#### Geometrische Bezugsflächen
+* Ebene
+* Digitales Geländemodell
+* natürliches Gelände
+* digitales Oberflächenmodell
+* Flächen geometrischer Körper > Abwicklung Zylinder
+
+### Differenzielle Entzerrung
+Räumliche, Differenzielle, Digitale Entzerrung sind zwar keine Synonyme, aber die räumliche Entzerrung wird zumeist differenziell (auch digital) durchgeführt
+**Differenzielle Entzerrung**: kleine Bildelemente (individuelle Berechnung für jeden Pixel > Wiederherstellung der inneren Orientierung (Pixelsystem vs. Bild-KS)
+
+### Näherungsverfahren
+* i.d.R. kein Entzerrungsverfahren
+* i.d.R. keine Wiederherstellung der Orientierung
+
+|   Pro    |  Contra  |
+|----------|----------|
+| kein Oberflächenmodell nötig    | Vereinfachung > Genauigkeitsverlust|
+| keine Orientierungsparameter nötig| |
+
