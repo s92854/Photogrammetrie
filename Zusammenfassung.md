@@ -169,7 +169,6 @@ Querfehler erzeugen Farbsäume (s.o.)
 
 ![beugungsunschärfe](https://github.com/s92854/Photogrammetrie/assets/134683810/647bcc73-1dba-42db-a78e-324367d04974)
 
-
 ## Geometrische Abbildungsverzeichnung
 Treten durh Abweichungen vom mathematischen Modell der Zentralperspektive auf
 * Verkippung der Bildebene gegenüber der optischen Achse
@@ -181,7 +180,7 @@ Treten durh Abweichungen vom mathematischen Modell der Zentralperspektive auf
    * Eintrittswinkel nicht mehr gleich Austrittswinkel > optische Verzeichnung
    * Hauptstrahl nicht mehr senkrecht auf Bildebene > Definierung eines mathematischen Projektionszentrums (neben physikalischem)
 
-O<sub>M</sub>' steht senkrecht im Abstand c über Bildebene: $\tau = \tau'$
+O<sub>M'</sub> steht senkrecht im Abstand c über Bildebene: $\tau = \tau'$
 
 ![image](https://github.com/s92854/Photogrammetrie/assets/134683810/7dc501d0-a5df-4737-96b0-9e0b413e0957)
 
@@ -295,6 +294,11 @@ Unterscheidung in:
 * Objektkoordinatensystem
 * Übergeordnete Koordinatensysteme
 
+sowie
+* rechtshand, linkshand KS
+* orthogonale, kartesische, geographische KS
+* 2D und 3D KS
+
 ![image](https://github.com/s92854/Photogrammetrie/assets/134683810/826faed1-cd63-4390-94b1-2706791a0c8b)
 
 ### Analoge Bildkoordinatensysteme
@@ -356,6 +360,8 @@ $${\begin{bmatrix} x \\ y \end{bmatrix}} = {\begin{bmatrix} cos \theta \\  \\ -s
 ![image](https://github.com/s92854/Photogrammetrie/assets/134683810/4a07173b-8b42-415d-9496-b9389c7561b0)
 
 ## Rotationsmatrizen
+* lineare Kombinationen von trigonometrischen Funktionen
+* Rotation um drei Koordinatenachsen > Transformation in ein beliebig orientiertes Koordinatensystem
 
 ![image](https://github.com/s92854/Photogrammetrie/assets/134683810/bb6d7d4f-3a75-47e7-ba94-f9c984dca3a5)
 
@@ -370,6 +376,9 @@ Reihenfolge der Rotationen muss bekannt sein, denn Rotationen sind nicht eindeut
 * Alle Kameraparameter die das mathematische Modell der Kamera möglichst genau bestimmen
    * Korrektur von Kamera- und Sensorungenauigkeiten
    * Korrektur der Messwerte
+   * Koordinaten des Bildhauptpunktes (x<sub>0</sub>,y<sub>0</sub>)
+   * Kamerakonstante (c)
+   * Parameter zur Beschreibung der Verzeichnungen/Abbildungsfehler ($\Delta x, \Delta y$)
 
 $$\vec{P'} = {\begin{bmatrix} x'P \\  \\ y'P \\ -c \end{bmatrix}} = {\begin{bmatrix} xP \\  \\ yP \\  \\ 0 \end{bmatrix}} + Korrekturen$$
 
@@ -384,7 +393,10 @@ $$\vec{P'} = {\begin{bmatrix} x'P \\  \\ y'P \\ -c \end{bmatrix}} = {\begin{bmat
 
 ## Äußere Orientierung
 * Beschreibt die Position & Lage der Kamera in Bezug auf das Zielkoordinatensystem
-* 6 + 1 Parameter (Zeit)
+* 6 + 1 Parameter
+   * Drei Koordinaten des Kamerastadnpunktes (X<sub>0</sub>, Y<sub>0</sub>, Z<sub>0</sub>)
+   * Drei Rotationswinkel für Orientierung gegenüber dem Modell-KS ($\phi, \omega, \kappa$)
+   * Zeit (t)
 
 ### Stabilität der Kamerageometrie
 Innere Geometrie wird beeinflusst durch:
@@ -421,3 +433,64 @@ Bekannt:
 
 ### Selbstkalibrierung
 * Simultankalibrierung ohne explizites Testfeld, nur mit photogrammetrischer Techniken
+
+## Fluglageparameter
+* Querneigung (Rollwinkel; *roll*): $\omega$
+* Längsneigung (Nickwinkel; *pitch*): $\varphi$
+* Kantung (Gier-/ Kurswinkel; *yaw*): $\kappa$
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/9b0d053a-80bc-491d-bd09-77b042e52e22)
+
+### Kameratypen
+* Analoge Kameras (photochemisch)
+* Digitale Kameras (photoelektrisch)
+* Flächensensoren
+* Zeilensensor
+
+### Bildformate & Aufnahmewinkel
+* Kleinformat, Mittelformat, Großformat
+* Schmalwinkel, Normalwinkel, Weitwinkel
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/6fb951e3-ba92-4ef2-97b8-efde7f4b22e5)
+
+### Messkamera
+* Kamerakonstante durch fest eingebautes, nicht fokussierbares Objektiv konstant
+* Bildebene senkrecht zu optischer Achse
+* Verzeichnungsfreies Objektiv ($\Delta r' < 4 µm) > Bildhauptpunkt = Bildmittelpunkt
+* ebene Bildfläche durch Glasplatten oder mechanische Bildverebnung (Andrucksystem)
+* optionale Zusatzeinrichtungen zur geodätischen Messung von Passpunkten
+
+## Digitale Luftbildkameras
+### Anforderungen
+* geometrische, radiometrische und spektrale Auflösung
+
+### Flächensensoren
+* 1 großflächiger CCD-Chip (Butterflytyp)
+* Patchworktyp
+* Bayer-Sensor (RGB Pixelmuster)
+* einzelne CCD-Chips für jeden Farbkanal
+
+### Zeilensensoren /-scanner
+* Sensoren mit einer Zeile oder Mehrzeilenscanner
+
+#### Butterflytyp
+* Aufnahme des panchromatischen Bildes
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/e22c27f5-4d9e-44bd-ba67-5952a67f860d)
+
+### Aufnahmekonfiguration
+... ist abhängig von
+* Objekt
+* geforderter Genauigkeit
+* verfügbaren Aufnahmesystemen
+* verfügbaren Auswertsystemen
+
+## Photogrammetrischer Normalfall
+* parallele Aufnhame senkrecht zur Basis
+
+![photo_norm](https://github.com/s92854/Photogrammetrie/assets/134683810/5857cc22-e9d2-4ace-bb46-d5040655b732)
+
+## Stereobildkonfiguration
+
+![stereokonfig](https://github.com/s92854/Photogrammetrie/assets/134683810/d904217e-422b-40f5-9cb3-8449ee2bf5ce)
+
