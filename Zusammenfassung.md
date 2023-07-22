@@ -287,3 +287,82 @@ Farb-Pixel wird in mehrere Sektoren unterteilt
 ## (Pixel-) Auflösung
 * Pixelauflösung = Fläche, die ein Pixel im Objektraum abdeckt
 * Auflösungsvermögen wird über physikalische Pixelgröße, Kamerakonstante, Abstand zum Objekt berechnet
+
+## Koordinatensysteme
+Unterscheidung in:
+* Bildkoordinatensystem
+* Kamerakoordinatensystem
+* Objektkoordinatensystem
+* Übergeordnete Koordinatensysteme
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/826faed1-cd63-4390-94b1-2706791a0c8b)
+
+### Analoge Bildkoordinatensysteme
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/0f471e27-373e-47e6-a1b3-b51761e83097)
+
+### Digitales Bildkoordinatensystem
+Die Position eines Punktes P' in der Bildmatrix ist in Pixelkoordinaten exakt definiert
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/48043fbf-6c30-4e0d-bdb9-e04b4fae9e03)
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/bd4cefc5-c8a4-4bad-a0aa-81f384f7a298) ![image](https://github.com/s92854/Photogrammetrie/assets/134683810/1c4b918b-30e7-4f0c-9c4c-464454be929b)
+
+### Kamerakoordinatensystem
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/2ae89486-851b-48b0-afa1-7de5af7d311e)
+
+$$P'(x'P \mid y'P \mid -c)$$
+
+$$\vec{P'} = {\begin{bmatrix} x'P \\ y'P \\ z'P \end{bmatrix}} + Korrekturen$$
+
+> Korrekturen: Kameraverzeichnung (Optik), Bildebenenverformung (Bildträger)
+
+$$Translation \vec{O} = {\begin{bmatrix} X0 \\ Y0 \\ Z0 \end{bmatrix}}$$
+
+Beschreibung der Kameraausrichtung im Objektraum kann über Winkel beschrieben werden: Rotation um drei Winkel
+
+### Rotationsmatrizen in der Ebene
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/7d06de22-b175-48cc-9f04-663793b35f25)
+
+$$\vec{f(x,y,\theta)} = {\begin{bmatrix} x' \\ y' \end{bmatrix}}$$
+
+$cos \theta = {Ankathete \over Hypothenuse}$
+
+$sin \theta = {Gegenkathete \over Hypothenuse}$
+
+$x1' = x * cos \theta$
+
+$\Delta x = y * sin \theta$
+
+$x' = x1' + \Delta x = x * cos \theta + y * sin \theta$
+
+&nbsp;
+
+$y1' = y * cos \theta$
+
+$\Delta y = x * sin \theta$
+
+$y' = y * cos \theta - x * sin \theta$
+
+&nbsp;
+<!--
+$${\begin{bmatrix} x' \\ y' \end{bmatrix}} = {\begin{bmatrix} cos \theta \\  \\ sin \theta \\ \mid \\ -sin \theta \\  \\ cos \theta \end{bmatrix}} * {\begin{bmatrix} x \\ y \end{bmatrix}}$$
+
+$${\begin{bmatrix} x \\ y \end{bmatrix}} = {\begin{bmatrix} cos \theta \\  \\ -sin \theta \\ \mid \\ sin \theta \\  \\ cos \theta \end{bmatrix}} * {\begin{bmatrix} x' \\ y' \end{bmatrix}}$$
+-->
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/4a07173b-8b42-415d-9496-b9389c7561b0)
+
+## Rotationsmatrizen
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/bb6d7d4f-3a75-47e7-ba94-f9c984dca3a5)
+
+Reihenfolge der Rotationen muss bekannt sein, denn Rotationen sind nicht eindeutig.
+
+### Rotation & Translation
+
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/663102ba-df1d-4da2-83c5-518747bef4da)
+![image](https://github.com/s92854/Photogrammetrie/assets/134683810/75ab4571-8545-45df-a6b9-b3b8427e5a99)
+
